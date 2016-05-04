@@ -21,6 +21,27 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             ProductListComponent = (function () {
                 function ProductListComponent() {
                     this.pageTitle = 'List of available Rugs';
+                    this.products = [
+                        {
+                            "productId": 1,
+                            "productName": "Farshe mashhad",
+                            "productCode": "mashhad-0011",
+                            "releaseDate": "March 19, 2016",
+                            "description": "Mashhad Rug.",
+                            "price": 2219.95,
+                            "starRating": 4.2,
+                            "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
+                        },
+                        {
+                            "productId": 2,
+                            "productName": "Farshe kashan",
+                            "productCode": "kashan-0011",
+                            "releaseDate": "March 19, 2016",
+                            "description": "kashan Rug.",
+                            "price": 2219.95,
+                            "starRating": 4.2,
+                            "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
+                        }];
                 }
                 ProductListComponent = __decorate([
                     core_1.Component({
