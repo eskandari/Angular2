@@ -51,7 +51,7 @@
                         <td>{{ product.productCode | lowercase }}</td>
                         <td>{{ product.releaseDate }}</td>
                         <td>{{ product.price | currency:'USD':true:'1.2-2' }}</td>
-                        <td>
+                        <td> <ee-star [rating]= 'product.starRating' (ratingClicked)='onRatingClicked($event)'></ee-star>
                        </td>
                     </tr>
                     

@@ -1,12 +1,14 @@
 import {Component, OnInit} from 'angular2/core'
 import {IProduct} from './product'
 import {ProductFilterPipe} from './product-filter.pipe'
+import {StarComponent} from '../shared/star.component'
 
 @Component({
     selector:'pm-products',
     templateUrl:'app/products/product-list.component.html',
     styleUrls:['app/products/product-list.component.css'],
-    pipes:[ProductFilterPipe]
+    pipes:[ProductFilterPipe],
+    directives:[StarComponent]
 })
 export /**
  * ProductComponent
@@ -25,7 +27,7 @@ class ProductListComponent  implements OnInit{
         "releaseDate": "March 19, 2016",
         "description": "Mashhad Rug.",
         "price": 2219.95,
-        "starRating": 4.2,
+        "starRating": 1.2,
         "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
     },
     {
@@ -45,6 +47,10 @@ class ProductListComponent  implements OnInit{
     
     ngOnInit():void{
         console.log('on init');
+    }
+    
+    onRatingClicked(message:string):void{
+        this.pageTitle = message;
     }
 
 }

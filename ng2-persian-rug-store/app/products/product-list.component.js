@@ -1,4 +1,4 @@
-System.register(['angular2/core', './product-filter.pipe'], function(exports_1, context_1) {
+System.register(['angular2/core', './product-filter.pipe', '../shared/star.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './product-filter.pipe'], function(exports_1, 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, product_filter_pipe_1;
+    var core_1, product_filter_pipe_1, star_component_1;
     var ProductListComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', './product-filter.pipe'], function(exports_1, 
             },
             function (product_filter_pipe_1_1) {
                 product_filter_pipe_1 = product_filter_pipe_1_1;
+            },
+            function (star_component_1_1) {
+                star_component_1 = star_component_1_1;
             }],
         execute: function() {
             ProductListComponent = (function () {
@@ -36,7 +39,7 @@ System.register(['angular2/core', './product-filter.pipe'], function(exports_1, 
                             "releaseDate": "March 19, 2016",
                             "description": "Mashhad Rug.",
                             "price": 2219.95,
-                            "starRating": 4.2,
+                            "starRating": 1.2,
                             "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
                         },
                         {
@@ -56,12 +59,16 @@ System.register(['angular2/core', './product-filter.pipe'], function(exports_1, 
                 ProductListComponent.prototype.ngOnInit = function () {
                     console.log('on init');
                 };
+                ProductListComponent.prototype.onRatingClicked = function (message) {
+                    this.pageTitle = message;
+                };
                 ProductListComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-products',
                         templateUrl: 'app/products/product-list.component.html',
                         styleUrls: ['app/products/product-list.component.css'],
-                        pipes: [product_filter_pipe_1.ProductFilterPipe]
+                        pipes: [product_filter_pipe_1.ProductFilterPipe],
+                        directives: [star_component_1.StarComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ProductListComponent);
