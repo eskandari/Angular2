@@ -2,6 +2,7 @@ import {Component, OnInit} from 'angular2/core'
 import {IProduct} from './product'
 import {ProductFilterPipe} from './product-filter.pipe'
 import {StarComponent} from '../shared/star.component'
+import {ProductService} from './product.service'
 
 @Component({
     selector:'pm-products',
@@ -18,28 +19,10 @@ class ProductListComponent  implements OnInit{
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    listFilter: string = 'mashhad';
-    products:IProduct[] = [
-    {
-        "productId": 1,
-        "productName": "Farshe mashhad",
-        "productCode": "mashhad-0011",
-        "releaseDate": "March 19, 2016",
-        "description": "Mashhad Rug.",
-        "price": 2219.95,
-        "starRating": 1.2,
-        "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-    },
-    {
-        "productId": 2,
-        "productName": "Farshe kashan",
-        "productCode": "kashan-0011",
-        "releaseDate": "March 19, 2016",
-        "description": "kashan Rug.",
-        "price": 2219.95,
-        "starRating": 4.2,
-        "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-    }    ];
+    listFilter: string;
+    products:IProduct[];
+    
+    constructor(private _productService: ProductService){}
     
     toggleImage():void{
         this.showImage = !this.showImage;
@@ -47,6 +30,7 @@ class ProductListComponent  implements OnInit{
     
     ngOnInit():void{
         console.log('on init');
+        this.products = this._productService.getProducts();
     }
     
     onRatingClicked(message:string):void{

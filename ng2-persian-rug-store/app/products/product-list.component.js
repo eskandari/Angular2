@@ -1,4 +1,4 @@
-System.register(['angular2/core', './product-filter.pipe', '../shared/star.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './product-filter.pipe', '../shared/star.component', './product.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './product-filter.pipe', '../shared/star.compo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, product_filter_pipe_1, star_component_1;
+    var core_1, product_filter_pipe_1, star_component_1, product_service_1;
     var ProductListComponent;
     return {
         setters:[
@@ -22,42 +22,25 @@ System.register(['angular2/core', './product-filter.pipe', '../shared/star.compo
             },
             function (star_component_1_1) {
                 star_component_1 = star_component_1_1;
+            },
+            function (product_service_1_1) {
+                product_service_1 = product_service_1_1;
             }],
         execute: function() {
             ProductListComponent = (function () {
-                function ProductListComponent() {
+                function ProductListComponent(_productService) {
+                    this._productService = _productService;
                     this.pageTitle = 'List of available Rugs';
                     this.imageWidth = 50;
                     this.imageMargin = 2;
                     this.showImage = false;
-                    this.listFilter = 'mashhad';
-                    this.products = [
-                        {
-                            "productId": 1,
-                            "productName": "Farshe mashhad",
-                            "productCode": "mashhad-0011",
-                            "releaseDate": "March 19, 2016",
-                            "description": "Mashhad Rug.",
-                            "price": 2219.95,
-                            "starRating": 1.2,
-                            "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-                        },
-                        {
-                            "productId": 2,
-                            "productName": "Farshe kashan",
-                            "productCode": "kashan-0011",
-                            "releaseDate": "March 19, 2016",
-                            "description": "kashan Rug.",
-                            "price": 2219.95,
-                            "starRating": 4.2,
-                            "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-                        }];
                 }
                 ProductListComponent.prototype.toggleImage = function () {
                     this.showImage = !this.showImage;
                 };
                 ProductListComponent.prototype.ngOnInit = function () {
                     console.log('on init');
+                    this.products = this._productService.getProducts();
                 };
                 ProductListComponent.prototype.onRatingClicked = function (message) {
                     this.pageTitle = message;
@@ -70,7 +53,7 @@ System.register(['angular2/core', './product-filter.pipe', '../shared/star.compo
                         pipes: [product_filter_pipe_1.ProductFilterPipe],
                         directives: [star_component_1.StarComponent]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [product_service_1.ProductService])
                 ], ProductListComponent);
                 return ProductListComponent;
             }());
