@@ -1,29 +1,26 @@
-import {Injectable} from 'angular2/core';
-import {IProduct} from './product'
+import { Injectable } from 'angular2/core';
+import { IProduct } from './product'
+import { Http, Response } from 'angular2/http'
+import { Observable } from 'rxjs/Observable'
 
-Injectable()
-export class ProductService{ 
-    getProducts():IProduct[]{
-                return [
-            {
-                "productId": 1,
-                "productName": "Farshe mashhad",
-                "productCode": "mashhad-0011",
-                "releaseDate": "March 19, 2016",
-                "description": "Mashhad Rug.",
-                "price": 2219.95,
-                "starRating": 1.2,
-                "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-            },
-            {
-                "productId": 2,
-                "productName": "Farshe kashan",
-                "productCode": "kashan-0011",
-                "releaseDate": "March 19, 2016",
-                "description": "kashan Rug.",
-                "price": 2219.95,
-                "starRating": 4.2,
-                "imageUrl": "http://oldcarpet.com/images/persian-rugs-mashad-rug-1-250.jpg"
-            }    ];
-    }
+@Injectable()
+export class ProductService{
+    
+    
+     private _productUrl = '/api/products/products.json';
+     
+     constructor(private _http: Http){}
+
+     
+    getProducts():Observable<IProduct[]>{
+                return this._http.get(this._productUrl)
+                           .map((response:Response) => <IProduct[]>response.json())
+                           .do(data => console.log('all: '+ JSON.stringify(data)))
+                           .catch(this.errorHandling);
+            }
+            
+   private errorHandling(error:Response){
+            console.log(error);
+            return Observable.throw(error.json().error || 'Server Error occured!');       
+   }
 }
