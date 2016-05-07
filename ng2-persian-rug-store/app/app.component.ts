@@ -1,6 +1,9 @@
 import {Component} from 'angular2/core';
 import {ProductListComponent} from './products/product-list.component';
 import {ProductService} from './products/product.service';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import 'rxjs/Rx';
+
 
 @Component({
     selector: 'pm-app',
@@ -9,7 +12,8 @@ import {ProductService} from './products/product.service';
     <pm-products></pm-products>
     `,
     directives:[ProductListComponent],
-    providers:[ProductService]
+    providers:[ProductService, 
+                HTTP_PROVIDERS]
 })
 export /**
  * AppComponent
