@@ -18,8 +18,14 @@ export class ProductService{
                            .do(data => console.log('all: '+ JSON.stringify(data)))
                            .catch(this.errorHandling);
             }
+
+    getProduct(id: number): Observable<IProduct> {
+        return this.getProducts()
+            .map((products: IProduct[]) => products.find(p => p.productId === id));
+    }
             
    private errorHandling(error:Response){
+   // TODO: call http loging        
             console.log(error);
             return Observable.throw(error.json().error || 'Server Error occured!');       
    }

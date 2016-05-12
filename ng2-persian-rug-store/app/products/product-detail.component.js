@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './product.service', '../shared/star.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,34 +10,51 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, router_1, product_service_1, star_component_1;
     var ProductDetailComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (product_service_1_1) {
+                product_service_1 = product_service_1_1;
+            },
+            function (star_component_1_1) {
+                star_component_1 = star_component_1_1;
             }],
         execute: function() {
             ProductDetailComponent = (function () {
-                function ProductDetailComponent() {
-                    this.pageTitle = 'Product details';
+                function ProductDetailComponent(_productService, _router, _routeParams) {
+                    this._productService = _productService;
+                    this._router = _router;
+                    this._routeParams = _routeParams;
+                    this.pageTitle = 'Product Detail';
                 }
-                Object.defineProperty(ProductDetailComponent.prototype, "value", {
-                    get: function () {
-                        return this._value;
-                    },
-                    set: function (v) {
-                        this._value = v;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
+                ProductDetailComponent.prototype.ngOnInit = function () {
+                    if (!this.product) {
+                        var id = +this._routeParams.get('id');
+                        // this.pageTitle += `: ${id}`;
+                        this.getProduct(id);
+                    }
+                };
+                ProductDetailComponent.prototype.getProduct = function (id) {
+                    var _this = this;
+                    this._productService.getProduct(id)
+                        .subscribe(function (product) { return _this.product = product; }, function (error) { return _this.errorMessage = error; });
+                };
+                ProductDetailComponent.prototype.onBack = function () {
+                    this._router.navigate(['Product']);
+                };
                 ProductDetailComponent = __decorate([
                     core_1.Component({
-                        selector: 'productDetail',
-                        templateUrl: 'app/products/product-detail.component.html'
+                        templateUrl: 'app/products/product-detail.component.html',
+                        directives: [star_component_1.StarComponent]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [product_service_1.ProductService, router_1.Router, router_1.RouteParams])
                 ], ProductDetailComponent);
                 return ProductDetailComponent;
             }());
